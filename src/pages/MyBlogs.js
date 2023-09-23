@@ -9,26 +9,26 @@ function MyBlogs() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const fetchBlog = async (page) => {
-    setLoading(true)
+    setLoading(true);
     const result = await getMyBlog(page);
     // check if every thing is fine
     if (result.status === 201) {
       setBlogData(result.data.data);
-      toast.success("My Blog Fetched",{
+      // toast.success("My Blog Fetched", {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      // });
+    } else {
+      toast.error(result.response.data.message, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
-        })
-    }else{
-      toast.error(result.response.data.message,{
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        })
+      });
     }
-    setLoading(false)
+    setLoading(false);
     // console.log(result);
   };
   useEffect(() => {
@@ -41,7 +41,7 @@ function MyBlogs() {
         {loading && <Loader />}
         <div className="row">
           {blogData.map((item) => (
-            <div className="col-md-4 my-2">
+            <div className="col-md-4 my-2" key={item._id}>
               <BlogCard props={item} fetchBlog={fetchBlog} isButton={true} />
             </div>
           ))}

@@ -7,25 +7,25 @@ function FollowerList() {
   const [followerList, setFollowerList] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchFollowerList = async () => {
-    setLoading(true)
+    setLoading(true);
     const result = await getFollowersList();
     if (result.status === 201) {
       setFollowerList(result.data.data);
-      toast.success("Followers Fetched",{
+      // toast.success("Followers Fetched",{
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   })
+    } else {
+      toast.error(result.response.data.message, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
-        })
-    }else{
-      toast.error(result.response.data.message,{
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        })
+      });
     }
-    setLoading(false)
+    setLoading(false);
   };
   useEffect(() => {
     fetchFollowerList();
