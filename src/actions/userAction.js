@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
-const url = process.env.REACT_APP_API_URL;
+const url = process.env.REACT_APP_API_URL || "https://3p2fzl-4000.csb.app";
 
 const userRegister = async (userObj) => {
   try {
